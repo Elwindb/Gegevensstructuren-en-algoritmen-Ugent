@@ -1,5 +1,5 @@
 HeapSort implementation C++
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 [source,python]
 -----------------
