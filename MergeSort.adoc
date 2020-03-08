@@ -1,0 +1,79 @@
+MergeSort implementation C++
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[source,C++]
+-----------------
+// C++ program for implementation of mergeSort based on the inmplementation based on wikipedia
+#include <iostream> 
+#include <vector> 
+  
+using namespace std; 
+
+template<class T>
+void merge(vector<T> & data, vector<T> & left, vector<T> & right){
+	
+	vector<T> hulp;
+	
+	int leftindex = 0;
+	int rightindex = 0;
+	
+	while(leftindex < left.size() && rightindex < right.size()){
+		if(left[leftindex] < right[rightindex]){
+			hulp.push_back(left[leftindex]);
+			leftindex++;
+		}else{
+			hulp.push_back(right[rightindex]);
+			rightindex++;
+		}
+	}
+	
+	while(leftindex < left.size()){
+		hulp.push_back(left[leftindex]);
+		leftindex++;
+	}
+	
+	while(rightindex < right.size()){
+		hulp.push_back(right[rightindex]);
+		rightindex++;	
+	}	
+	
+	data = hulp;
+}
+
+template<class T>
+void mergesort(vector<T> & data){
+	if(data.size() == 1){
+		return; 
+	}
+	
+	auto midden = data.begin() + ( data.size() / 2 );
+	vector<T> left(data.begin(),midden);
+	vector<T> right(midden,data.end());
+	
+	mergesort(left);
+	mergesort(right);
+	
+	merge(data, left, right);
+}
+  
+
+int main() 
+{ 
+	vector<int> data = {12, 11, 13, 5, 6, 7};
+	
+	for(auto getal : data){
+		cout << getal << " ";
+	}
+	
+	mergesort(data); 
+	
+	cout << "sorteren" << endl;
+	
+	for(auto getal : data){
+		cout << getal << " ";
+	}
+	
+} 
+
+
+-----------------
