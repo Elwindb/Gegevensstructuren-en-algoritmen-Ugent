@@ -1,0 +1,74 @@
+MergeSort implementation C++
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[source,C++]
+-----------------
+#include <iostream> 
+#include <vector> 
+  
+using namespace std; 
+
+
+template<class T>
+int partition(vector<T> & getallen, int i, int j){
+	
+	//Pivor first element
+	int pivot = getallen[0];
+
+	while(i < j){
+
+		while (getallen[i] < pivot){
+			i++;
+		}
+          
+        while (getallen[j] > pivot){
+        	j--;
+		}	
+		
+		if(i <= j){
+			swap(getallen[i],getallen[j]);
+			i++;
+			i--;
+		}
+	}
+	
+	return i;
+	
+}
+
+template<class T>
+void quicksort(vector<T> & getallen, int left, int right){
+
+
+	if(left < right){
+		
+		int pivot = partition(getallen, left, right);
+		
+		quicksort(getallen,left,pivot-1);
+		quicksort(getallen,pivot  , right);
+		
+	}
+	
+	
+	
+}
+
+int main() 
+{ 
+	vector<int> data = {12, 11, 13, 5, 6, 7};
+	
+	
+	for(auto getal : data){
+		cout << getal << " ";
+	}
+	
+	quicksort(data, 0 , data.size() - 1); 
+	
+	cout << "sorteren" << endl;
+	
+	for(auto getal : data){
+		cout << getal << " ";
+	}
+} 
+
+-----------------
