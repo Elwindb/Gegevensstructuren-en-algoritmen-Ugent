@@ -28,7 +28,7 @@ int partition(vector<T> & getallen, int i, int j){
 		if(i <= j){
 			swap(getallen[i],getallen[j]);
 			i++;
-			i--;
+			j--;
 		}
 	}
 	
