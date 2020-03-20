@@ -1,0 +1,51 @@
+Binary Search implementation C++
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[source,python]
+-----------------
+#include <iostream> 
+#include <vector> 
+  
+using namespace std; 
+
+
+template<class T>
+int binary_search(vector<T> & data, T find){
+	int index = -1;
+	
+	int l = 0;
+	int r = data.size();
+	int m;
+	
+	while(l < r - 1){
+		m = l + (r-l)/2;//middle element between left and right
+		if(find < data[m]){
+			r = m;
+		}else{
+			l = m;
+		}
+	}
+	if(find == data[l]){ // if the elemant has been found
+		return l; //return the index
+	}else{
+		return data.size(); //return non exiting index
+	}
+}
+
+int main() 
+{ 
+	vector<int> data;
+	
+	for(int i = 0 ; i < 100 ; i++){
+		data.push_back(i);
+	}
+	
+	cout << "seaching for number 76" << endl;
+	
+	int index = binary_search(data, 76); 
+	
+	cout << "found on index " << index << endl;
+
+} 
+
+-----------------
