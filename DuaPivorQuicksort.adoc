@@ -1,0 +1,97 @@
+DualPivotQuicksort implementation C++
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[source,C++]
+-----------------
+#include <iostream> 
+#include <vector> 
+  
+using namespace std; 
+
+
+template<class T>
+int partition(vector<T> & arr, int left, int right, int * lp){
+    
+    //left pivot must be smaller then right pivot
+    if (arr[left] > arr[right]) {
+        swap(arr[left], arr[right]);  
+    }
+        
+    int j = left + 1;  
+    int g = right - 1;
+    int k = left + 1;
+    *lp = arr[left];
+    int rp = arr[right];  
+    while (k <= g)  
+    {  
+  
+        // if elements are less than the left pivot  
+        if (arr[k] < *lp)  
+        {  
+            swap(arr[k], arr[j]);  
+            j++;  
+        }  
+  
+        // if elements are greater than or equal  
+        // to the right pivot  
+        else if (arr[k] >= rp)  
+        {  
+            while (arr[g] > rp && k < g)  
+                g--;  
+            swap(arr[k], arr[g]);  
+            g--;  
+            if (arr[k] < *lp) 
+            {  
+                swap(arr[k], arr[j]);  
+                j++;  
+            }  
+        }  
+        k++;  
+    }  
+    j--;  
+    g++;  
+  
+    // bring pivots to their appropriate positions.  
+    swap(arr[left], arr[j]);  
+    swap(arr[right], arr[g]);  
+  
+    // returning the indices of the pivots.  
+    *lp = j; // because we cannot return two elements  
+            // from a function.  
+  
+    return g;  
+    
+}
+template<class T>
+void DualPivotQuickSort(vector<T> & arr, int left, int right)  {  
+    if (left < right)  
+    {  
+        // lp means left pivot, and rp means right pivot.  
+        int lp, rp;  
+        rp = partition(arr, left, right, &lp);  
+        DualPivotQuickSort(arr, left, lp - 1);  
+        DualPivotQuickSort(arr, lp + 1, rp - 1);  
+        DualPivotQuickSort(arr, rp + 1, right);  
+    }  
+}  
+
+// Driver program 
+int main() 
+{ 
+    vector<int> data = {12, 11, 13, 5, 6, 7};
+    
+    
+    for(auto getal : data){
+        cout << getal << " ";
+    }
+    
+    DualPivotQuickSort(data, 0 , data.size() - 1); 
+    
+    cout << "sorteren" << endl;
+    
+    for(auto getal : data){
+        cout << getal << " ";
+    }
+} 
+
+-----------------
