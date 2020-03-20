@@ -1,0 +1,40 @@
+Sequential search for an unsorted array implementation in C++
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[source,python]
+-----------------
+#include <iostream> 
+#include <vector> 
+  
+using namespace std; 
+
+
+template<class T>
+int sequential_search(vector<T> & data, T find){
+	int index = -1; //Not existing index in case not found
+	for(int i = 0 ; i < data.size(); i++){
+		if(data[i] == find){
+			index = i;
+			i = data.size();
+		}
+	}
+	
+	return index;
+}
+
+int main() 
+{ 
+	vector<int> data;
+	
+	for(int i = 0 ; i < 100 ; i++){
+		data.push_back(i);
+	}
+	
+	cout << "seaching for number 76" << endl;
+	
+	int index = sequential_search(data, 76); 
+	
+	cout << "found on index " << index << endl;
+
+} 
+-----------------
