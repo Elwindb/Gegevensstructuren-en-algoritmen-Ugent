@@ -1,0 +1,62 @@
+Binary search for an array with unnkow lenght implementation in C++
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[source,python]
+-----------------
+#include <iostream> 
+#include <vector> 
+  
+using namespace std; 
+
+template<class T>
+int binary_search(vector<T> & data, T find, int l, int r){
+	int index = -1;
+	
+	int m;
+	
+	while(l < r - 1){
+		m = l + (r-l)/2;//middle element between left and right
+		if(find < data[m]){
+			r = m;
+		}else{
+			l = m;
+		}
+	}
+	if(find == data[l]){ // if the elemant has been found
+		return l; //return the index
+	}else{
+		return data.size(); //return non exiting index
+	}
+}
+
+template<class T>
+int binary_search_unknow_lenght(vector<T> & data, T find){
+	
+	int l = 0;
+	int r = 1;
+	
+	//Find element left and right of the value
+	while(find > data[r]){
+		l = r;
+		r *=2;
+	}
+	
+	return binary_search(data,find ,l ,r );
+}
+	
+
+int main() 
+{ 
+	vector<int> data;
+	
+	for(int i = 0 ; i < 100000 ; i++){
+		data.push_back(i);
+	}
+	
+	cout << "seaching for number 1176" << endl;
+	int index = binary_search_unknow_lenght(data ,1176);
+	
+	cout << "found on index " << index << endl;
+
+} 
+-----------------
