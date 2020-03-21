@@ -1,4 +1,4 @@
-Sequential search for an unsorted array implementation in C++
+interpolation search for an unsorted array implementation in C++
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 [source,python]
@@ -10,16 +10,33 @@ using namespace std;
 
 
 template<class T>
-int sequential_search(vector<T> & data, T find){
-	int index = -1; //Not existing index in case not found
-	for(int i = 0 ; i < data.size(); i++){
-		if(data[i] == find){
-			index = i;
-			i = data.size();
+int interpolation_search(vector<T> & data, T find){
+	int index = -1;
+	
+	int l = 0;
+	int r = data.size() - 1;
+	int m;
+	
+	while(l < r - 1){
+		m = l + (((r - l) / (data[r] - data[l])) * (find - data[l]));
+		cout << m << " ";
+		
+		if(find == data[m]){
+			l = m;
+			r = m;
+		}
+		
+		if(find < data[m]){
+			r = m;
+		}else{
+			l = m;
 		}
 	}
-	
-	return index;
+	if(find == data[l]){ // if the elemant has been found
+		return l; //return the index
+	}else{
+		return data.size(); //return non exiting index
+	}
 }
 
 int main() 
@@ -32,7 +49,7 @@ int main()
 	
 	cout << "seaching for number 76" << endl;
 	
-	int index = sequential_search(data, 76); 
+	int index = interpolation_search(data, 76); 
 	
 	cout << "found on index " << index << endl;
 
