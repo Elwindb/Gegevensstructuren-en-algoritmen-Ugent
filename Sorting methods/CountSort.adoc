@@ -1,0 +1,54 @@
+CountSort implementation C++
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[source,C++]
+-----------------
+#include <iostream> 
+#include <vector> 
+  
+using namespace std; 
+
+void countSort(vector<int> & data){
+	
+	vector<int> hulp(20);
+	vector<int> output(20);
+	//Use the hulp vector as a frequency table
+	for(int i = 0; i < data.size(); i++){
+		hulp[data[i]]++; 
+	}
+
+	//Make cumulative frequency of each element
+	for(int i = 1; i < hulp.size(); i++){
+		hulp[i] = hulp[i-1] +  hulp[i];
+	}
+	
+	//Build the output array 
+	for(int i = data.size() - 1 ; i >= 0 ; i--){
+		output[  hulp[data[i]] - 1  ] = data[i];
+		hulp[data[i]]--;
+	}	
+	for(int i=0; i < data.size(); i++){
+		data[i] = output[i];
+	}
+
+}
+
+// Driver program 
+int main() 
+{ 
+	vector<int> data = {12, 11, 13, 5,5, 6, 7};
+	
+	for(auto getal : data){
+		cout << getal << " ";
+	}
+	
+	countSort(data); 
+	
+	cout << "sorteren" << endl;
+	
+	for(auto getal : data){
+		cout << getal << " ";
+	}
+} 
+
+-----------------
